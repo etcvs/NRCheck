@@ -3,7 +3,7 @@ set -u
 
 # --- 基礎資訊 ---
 VERSION="1.3.0"
-GITHUB_RAW_BASE="https://raw.githubusercontent.com/你的帳號/NRCheck/main/modules"
+GITHUB_RAW_BASE="https://raw.githubusercontent.com/etcvs/NRCheck/main/modules"
 NGINX_BIN=$(command -v nginx || echo "/usr/local/openresty/nginx/sbin/nginx")
 OPENRESTY_BIN="/usr/local/openresty/bin/openresty"
 ERROR_LOGS="/usr/local/openresty/nginx/logs/error.log /var/log/nginx/error.log"

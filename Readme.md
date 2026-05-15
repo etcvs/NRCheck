@@ -1,4 +1,6 @@
 # NRCheck (Nginx/OpenResty Security Auditor)
+##本專案由ChatGPT 5.5Instant +Gemini 3快捷 互相檢查撰寫
+
 
 `NRCheck` 是一個專為 Nginx 與 OpenResty 設計的輕量級、唯讀（Read-only）安全弱點掃描工具。透過自動導出記憶體中實際運行的配置（Active Config）並結合雲端模組化設計，協助維運人員在不影響生產環境的前提下，快速排查已知的資安漏洞與高風險設定。
 
