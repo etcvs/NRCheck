@@ -1,4 +1,4 @@
-# NRCheck (Nginx/OpenResty Security Auditor) 🇹🇼
+# NRCheck (Nginx/OpenResty Security Auditor) 
 ##本專案由ChatGPT 5.5Instant +Gemini 3快捷 互相檢查撰寫
 
 
