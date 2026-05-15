@@ -17,4 +17,4 @@
 在任何安裝有 Nginx/OpenResty 的 Linux 主機上，以 root 或具備 Nginx 讀取權限的身分執行以下指令：
 
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/](https://raw.githubusercontent.com/)
+curl -fsSL https://raw.githubusercontent.com/etcvs/NRCheck/main/nrcheck.sh | sudo bash
