@@ -70,7 +70,17 @@ echo "=================================================="
 CONF_PATH=""
 if [ -n "$CMD" ]; then
     # 修正重點：加上 -e 參數，避免 grep 把 --prefix 當成選項；同時處理可能帶有雙引號或單引號的路徑
-    CONF_PATH=$($CMD -V 2>&1 | grep -oE -e '--prefix=[^ ]*' | cut -d= -f2 | tr -d "'\"")
+    CONF_PREFIX=$($CMD -V 2>&1 | awk '{
+      for (i=1;i<=NF;i++) {
+        if ($i ~ /^--prefix=/) {
+          sub(/^--prefix=/,"",$i)
+          gsub(/\047/,"",$i)
+          print $i
+          exit
+        }
+      }
+    }')
+CONF_PATH="${CONF_PREFIX}/conf"
     if [ -n "$CONF_PATH" ]; then
         CONF_PATH="${CONF_PATH}/conf"
     fi
