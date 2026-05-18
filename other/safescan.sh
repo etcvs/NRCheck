@@ -62,17 +62,21 @@ echo " Worker Connections"
 echo "=================================================="
 ss -antp | grep -E 'nginx|openresty' | head -50 || true
 echo
-
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 echo "=================================================="
 echo " Dynamic Path Detection & Inspect"
 echo "=================================================="
 # 自動偵測配置路徑
 CONF_PATH=""
 if [ -n "$CMD" ]; then
-    CONF_PATH=$($CMD -V 2>&1 | grep -oE -e '--prefix=[^ ]*' | cut -d= -f2 | sed "s/'//g")/conf
+    # 修正重點：加上 -e 參數，避免 grep 把 --prefix 當成選項；同時處理可能帶有雙引號或單引號的路徑
+    CONF_PATH=$($CMD -V 2>&1 | grep -oE -e '--prefix=[^ ]*' | cut -d= -f2 | tr -d "'\"")
+    if [ -n "$CONF_PATH" ]; then
+        CONF_PATH="${CONF_PATH}/conf"
+    fi
 fi
 
-# 如果找不到動態路徑，則嘗試常見預設路徑
+# 如果找不到動態路徑，或動態路徑不存在，則嘗試常見預設路徑
 if [ -z "$CONF_PATH" ] || [ ! -d "$CONF_PATH" ]; then
     for path in "/usr/local/openresty/nginx/conf" "/etc/nginx" "/usr/local/nginx/conf"; do
         if [ -d "$path" ]; then
@@ -95,7 +99,6 @@ else
     echo "⚠️ 找不到有效的 Nginx/OpenResty 配置路徑，跳過過濾檢查。"
 fi
 echo
-
 echo "=================================================="
 echo " nginx/openresty deleted log fix"
 echo "=================================================="
