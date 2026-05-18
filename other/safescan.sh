@@ -69,7 +69,7 @@ echo "=================================================="
 # 自動偵測配置路徑
 CONF_PATH=""
 if [ -n "$CMD" ]; then
-    CONF_PATH=$($CMD -V 2>&1 | grep -oE '--prefix=[^ ]*' | cut -d= -f2 | sed "s/'//g")/conf
+    CONF_PATH=$($CMD -V 2>&1 | grep -oE -e '--prefix=[^ ]*' | cut -d= -f2 | sed "s/'//g")/conf
 fi
 
 # 如果找不到動態路徑，則嘗試常見預設路徑
